@@ -24,3 +24,13 @@ export const fetchSearch = (game_name) => async (dispatch) => {
         }
     });
 }
+
+export const clearSearch = () => async (dispatch) => {
+
+    dispatch({
+        type: 'CLEAR_SEARCHED',
+        payload: {
+            searched: [],
+        }
+    });
+}

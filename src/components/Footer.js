@@ -1,13 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import {motion} from 'framer-motion';
 import styled from 'styled-components';
 
 const Footer = () => {
+
+    const logoAnim = {
+        hidden: {opacity: 0, y: 100},
+        show: {opacity: 1, y: 0, transition: {duration: 1}}
+    }
+
     return (
         <MainFooter>
             <div className="container">
-                <ContentFooter>
+                <ContentFooter variants={logoAnim} initial="hidden" animate="show">
                     <Link to="/">
                         <svg width="40" height="43" viewBox="0 0 50 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0H23.2759V16.3793H0V0Z" fill="#545454"/>
@@ -29,10 +36,11 @@ const Footer = () => {
 
 const MainFooter = styled.footer`
     width: 100%;
+    height: 170px;
     margin: 5em 0;
 `;
 
-const ContentFooter = styled.div`
+const ContentFooter = styled(motion.div)`
     width: 100%;
     display: flex;
     flex-direction: column;

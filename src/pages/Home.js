@@ -7,6 +7,7 @@ import CardDestacado from '../components/CardDestacado';
 import CardNews from '../components/CardNews';
 import Buscador from '../components/Buscador';
 
+import {motion} from 'framer-motion';
 import styled from 'styled-components';
 
 
@@ -23,6 +24,11 @@ const Home = ({isSearching, setIsSearching}) => {
     return (
         <>
         <Principales>
+            {popular.length === 0 && (
+                <div className="cargando-principales-container">
+                    <p className="cargando-principales">Cargando...</p>
+                </div>
+            )}
             {popular.map((game) => (
                 <CardDestacado key={game.id} game={game} />
             ))}
@@ -40,17 +46,32 @@ const Home = ({isSearching, setIsSearching}) => {
             </div>
         </NewGames>
         {isSearching && (
-            <Buscador />
+            <Buscador setIsSearching={setIsSearching} isSearching={isSearching} />
         )}
         </>
     );
 }
 
-const Principales = styled.section`
+const Principales = styled(motion.section)`
     width: 100%;
     height: 60vh;
     display: flex;
     justify-content: space-between;
+
+
+    @media (max-width: 1300px) {
+        height: 50vh;
+    }
+
+    @media (max-width: 1100px) {
+        height: 40vh;
+    }
+
+    @media (max-width: 1024px) {
+        flex-wrap: wrap;
+        height: auto;
+    }
+
 `;
 
 const NewGames = styled.section`
@@ -90,6 +111,31 @@ const ContentTitNew = styled.div`
             background-color: #C4C4C4;
         }
     }
+
+    @media (max-width: 876px) {
+        h2 {
+            font-size: 2em;
+        }
+    }
+
+    @media (max-width: 767px) {
+        h2 {
+            font-size: 1.5em;
+        }
+    }
+
+    @media (max-width: 600px) {
+        h2 {
+            padding: 2em 1em;
+        }
+    }
+
+    @media (max-width: 450px) {
+        h2 {
+            padding: 2em 0.5em;
+            font-size: 1.2em;
+        }
+    }
 `;
 
 const ContentNew = styled.div`
@@ -105,6 +151,14 @@ const ContentNew = styled.div`
             object-fit: cover;
             display: block;
         }
+    }
+
+    @media (max-width: 1024px) {
+        grid-template-rows: repeat(15, 10vw);
+    }
+
+    @media (max-width: 600px) {
+        grid-template-rows: repeat(40, 10vw);
     }
 `;
 

@@ -6,7 +6,14 @@ import styled from 'styled-components';
 import starFull from '../assets/starFull.svg';
 import starEmpty from '../assets/starEmpty.svg';
 
+import {motion} from 'framer-motion';
+
 const CardDestacado = ({game}) => {
+
+    const cuatroAnim = {
+        hidden: {opacity: 0, y: 100},
+        show: {opacity: 1, y: 0, transition: {duration: 0.6, ease: 'easeOut'}}
+    }
 
     const id = game.id;
 
@@ -17,9 +24,9 @@ const CardDestacado = ({game}) => {
 
         for (let i = 1; i <= 5; i++) {
             if (i <= rating) {
-                stars.push(<img alt="star" key={i} src={starFull} />); 
+                stars.push(<img alt="star" key={i} src={starFull} className="star-destacado" />); 
             } else {
-                stars.push(<img alt="star" key={i} src={starEmpty} />);
+                stars.push(<img alt="star" key={i} src={starEmpty} className="star-destacado" />);
             }
         }
 
@@ -27,7 +34,7 @@ const CardDestacado = ({game}) => {
     }
 
     return (
-        <DestacadoItem key={game.id}>
+        <DestacadoItem variants={cuatroAnim} initial="hidden" animate="show" key={game.id}>
             <Link to={`/game/${id}`} className="link-detalle">
             <img src={game.background_image} alt="Imagen" className="dest-img" />
             <InfoDestacado>
@@ -68,7 +75,7 @@ const InfoDestacado = styled.div`
     }
 `;
 
-const DestacadoItem = styled.figure`
+const DestacadoItem = styled(motion.figure)`
     width: 24.94%;
     position: relative;
     
@@ -98,6 +105,14 @@ const DestacadoItem = styled.figure`
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    @media (max-width: 1024px) {
+        width: 50%;
+    }
+
+    @media (max-width: 600px) {
+        width: 100%;
     }
 `;
 
