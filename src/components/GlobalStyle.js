@@ -208,14 +208,17 @@ const GlobalStyle = createGlobalStyle`
     @media (max-width: 767px) {
         #main-logotipo {
             width: 80%;
+            height: auto;
         }
 
         #lupa-svg {
             width: 80%;
+            height: auto;
         }
 
         #close-svg {
             width: 60%;
+            height: auto;
         }
 
         #lupa-buscar {
